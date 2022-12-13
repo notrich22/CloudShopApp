@@ -28,10 +28,10 @@ namespace CloudShopApp.Controllers
             order.Description = orderinfo.Description;
             await context.Response.WriteAsJsonAsync(await logicService.AddOrder(order));
         }
-        public async Task RemoveOrder(HttpContext context) 
+        public async Task DeleteOrder(HttpContext context) 
         {
             IdInfo id = await context.Request.ReadFromJsonAsync<IdInfo>();
-            await logicService.RemoveOrder(id.id);
+            await logicService.DeleteOrder(id.id);
         }
         public async Task UpdateOrder(HttpContext context)
         {

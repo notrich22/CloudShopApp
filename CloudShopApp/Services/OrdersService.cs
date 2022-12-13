@@ -53,7 +53,7 @@ namespace CloudShopApp.Services
                 return null;
             }
         }
-        public async Task RemoveOrder(int id)
+        public async Task DeleteOrder(int id)
         {
             try
             {

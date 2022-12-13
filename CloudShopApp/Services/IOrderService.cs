@@ -7,7 +7,7 @@ namespace CloudShopApp.Services
         Task<Order> AddOrder(Order order);
         Task<List<Order>> GetAllOrders();
         Task<Order> GetOrder(int id);
-        Task RemoveOrder(int id);
+        Task DeleteOrder(int id);
         Task<Order> UpdateOrder(int id, Order order);
 
     }
