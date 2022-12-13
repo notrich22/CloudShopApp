@@ -76,7 +76,8 @@ namespace CloudShopApp.Services
                 {
                     Order oldOrder = await db.Orders.FirstOrDefaultAsync(n => n.id == id);
                     oldOrder.Description = order.Description;
-                    oldOrder.FeedbackContacts = order.FeedbackContacts;
+                    oldOrder.ClientId= order.ClientId;
+                    oldOrder.Client = await db.Clients.FirstOrDefaultAsync(n=> n.Id == order.ClientId);
                     await db.SaveChangesAsync();
                     return oldOrder;
                 }

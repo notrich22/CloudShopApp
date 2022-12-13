@@ -24,7 +24,7 @@ namespace CloudShopApp.Controllers
         {
             OrderInfo orderinfo = await context.Request.ReadFromJsonAsync<OrderInfo>();
             Order order = new Order();
-            order.FeedbackContacts = orderinfo.FeedbackContacts;
+            order.ClientId = orderinfo.ClientId;
             order.Description = orderinfo.Description;
             await context.Response.WriteAsJsonAsync(await logicService.AddOrder(order));
         }
@@ -37,7 +37,7 @@ namespace CloudShopApp.Controllers
         {
             UpdateOrderInfo orderinfo = await context.Request.ReadFromJsonAsync<UpdateOrderInfo>();
             Order order = new Order();
-            order.FeedbackContacts = orderinfo.FeedbackContacts;
+            order.ClientId = orderinfo.ClientId;
             order.Description = orderinfo.Description;
             await context.Response.WriteAsJsonAsync(await logicService.UpdateOrder(orderinfo.id, order));
         }

@@ -6,6 +6,7 @@ namespace CloudShopApp.Model
     public class CloudDBContext : DbContext
     {
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Client> Clients { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // получаем файл конфигурации
