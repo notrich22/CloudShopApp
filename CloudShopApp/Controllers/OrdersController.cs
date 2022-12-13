@@ -10,17 +10,17 @@ namespace CloudShopApp.Controllers
         public OrdersController(OrdersService ordersService) {
             this.logicService = ordersService;
         }
-        async Task GetAllOrders(HttpContext context)
+        public async Task GetAllOrders(HttpContext context)
         {
             await context.Response.WriteAsJsonAsync(await logicService.GetAllOrders());
         }
-        async Task GetOrder(HttpContext context)
+        public async Task GetOrder(HttpContext context)
         {
             IdInfo id = await context.Request.ReadFromJsonAsync<IdInfo>();
             Order order = await logicService.GetOrder(id.id);
             await context.Response.WriteAsJsonAsync(order);
         }
-        async Task AddOrder(HttpContext context)
+        public async Task AddOrder(HttpContext context)
         {
             OrderInfo orderinfo = await context.Request.ReadFromJsonAsync<OrderInfo>();
             Order order = new Order();
@@ -28,12 +28,12 @@ namespace CloudShopApp.Controllers
             order.Description = orderinfo.Description;
             await context.Response.WriteAsJsonAsync(await logicService.AddOrder(order));
         }
-        async Task RemoveOrder(HttpContext context) 
+        public async Task RemoveOrder(HttpContext context) 
         {
             IdInfo id = await context.Request.ReadFromJsonAsync<IdInfo>();
             await logicService.RemoveOrder(id.id);
         }
-        async Task UpdateOrder(HttpContext context)
+        public async Task UpdateOrder(HttpContext context)
         {
             UpdateOrderInfo orderinfo = await context.Request.ReadFromJsonAsync<UpdateOrderInfo>();
             Order order = new Order();

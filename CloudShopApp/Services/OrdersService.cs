@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CloudShopApp.Services
 {
-    public class OrdersService
+    public class OrdersService : IOrderService
     {
         public async Task<Order> AddOrder(Order order)
         {
