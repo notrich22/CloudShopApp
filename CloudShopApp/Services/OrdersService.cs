@@ -12,7 +12,7 @@ namespace CloudShopApp.Services
             {
                 using (var db = new CloudDBContext())
                 {
-                    
+                    order.Client =await db.Clients.FirstOrDefaultAsync(n=> n.Id == order.ClientId);
                     await db.Orders.AddAsync(order);
                     await db.SaveChangesAsync();
                     return order;

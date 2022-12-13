@@ -55,13 +55,13 @@ namespace CloudShopApp.Services
             }
         }
 
-        public Task<List<Client>> GetClients()
+        public async Task<List<Client>> GetClients()
         {
             try
             {
                 using (var db = new CloudDBContext())
                 {
-                    return db.Clients.ToListAsync();
+                    return await db.Clients.ToListAsync();
                 }
             }
             catch (Exception ex)
@@ -77,8 +77,9 @@ namespace CloudShopApp.Services
             {
                 using (var db = new CloudDBContext())
                 {
-                    Client oldClient = await db.Clients.FirstOrDefaultAsync(x => x.Id == id);
-                    oldClient = client;
+                    var oldClient = await db.Clients.FirstOrDefaultAsync(x => x.Id == id);
+                    oldClient.Name = client.Name;
+                    oldClient.Contacts = client.Contacts;
                     await db.SaveChangesAsync();
                     return oldClient;
                 }

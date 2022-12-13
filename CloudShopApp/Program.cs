@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<OrdersController>();
-builder.Services.AddSingleton<IOrderService, OrdersService>();
+builder.Services.AddSingleton<OrdersService>();
 builder.Services.AddSingleton<ClientsController>();
-builder.Services.AddSingleton<IClientService, ClientsService>();
+builder.Services.AddSingleton<ClientsService>();
 var app = builder.Build();
 
 app.MapPost("/add-order", app.Services.GetRequiredService<OrdersController>().AddOrder);
