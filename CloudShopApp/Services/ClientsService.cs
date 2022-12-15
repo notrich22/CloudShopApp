@@ -23,19 +23,21 @@ namespace CloudShopApp.Services
             }
         }
 
-        async public Task DeleteClient(int id)
+        async public Task<bool> DeleteClient(int id)
         {
             try
             {
                 using (var db = new CloudDBContext())
                 {
-                    db.Remove(await db.Clients.FirstOrDefaultAsync(x => x.Id == id));
+                    db.Remove(await db.Clients.FirstOrDefaultAsync(x => x.id == id));
                     await db.SaveChangesAsync();
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                return false;
             }
         }
 
@@ -45,7 +47,7 @@ namespace CloudShopApp.Services
             {
                 using (var db = new CloudDBContext())
                 {
-                    return await db.Clients.FirstOrDefaultAsync(x => x.Id == id);
+                    return await db.Clients.FirstOrDefaultAsync(x => x.id == id);
                 }
             }
             catch (Exception ex)
@@ -77,7 +79,7 @@ namespace CloudShopApp.Services
             {
                 using (var db = new CloudDBContext())
                 {
-                    var oldClient = await db.Clients.FirstOrDefaultAsync(x => x.Id == id);
+                    var oldClient = await db.Clients.FirstOrDefaultAsync(x => x.id == id);
                     oldClient.Name = client.Name;
                     oldClient.Contacts = client.Contacts;
                     await db.SaveChangesAsync();

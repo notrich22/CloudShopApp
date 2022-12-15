@@ -35,7 +35,7 @@ namespace CloudShopApp.Controllers
             Client client = new Client();
             client.Name = updateClient.Name;
             client.Contacts = updateClient.Contacts;
-            await context.Response.WriteAsJsonAsync<Client>(await logicService.UpdateClient(updateClient.id, client));
+            await context.Response.WriteAsJsonAsync(await logicService.UpdateClient(updateClient.id, client));
 
         }
         public async Task DeleteClient(HttpContext context)

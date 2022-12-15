@@ -41,5 +41,37 @@ namespace CloudShopApp.Controllers
             order.Description = orderinfo.Description;
             await context.Response.WriteAsJsonAsync(await logicService.UpdateOrder(orderinfo.id, order));
         }
+        public async Task AddOrderComponent(HttpContext context)
+        {
+            OrderComponentInfo orderinfo = await context.Request.ReadFromJsonAsync<OrderComponentInfo>();
+            OrderComponent orderComponent = new OrderComponent();
+            orderComponent.OrderId = orderinfo.OrderId;
+            orderComponent.ProductId = orderinfo.ProductId;
+            orderComponent.Amount = orderinfo.Amount;
+            await context.Response.WriteAsJsonAsync(await logicService.AddOrderComponent(orderComponent));
+        }
+        public async Task GetOrderComponent(HttpContext context)
+        {
+            IdInfo id = await context.Request.ReadFromJsonAsync<IdInfo>();
+            OrderComponent orderComponent = await logicService.GetOrderComponent(id.id);
+            await context.Response.WriteAsJsonAsync(orderComponent);
+        }
+        public async Task GetOrderComponents(HttpContext context)
+        {
+            await context.Response.WriteAsJsonAsync(await logicService.GetOrderComponents());
+        }
+        public async Task UpdateOrderComponent(HttpContext context)
+        {
+            OrderComponentUpdateInfo orderComponentInfo = await context.Request.ReadFromJsonAsync<OrderComponentUpdateInfo>();
+            OrderComponent orderComponent = new OrderComponent();
+            orderComponent.OrderId = orderComponentInfo.OrderId;
+            orderComponent.ProductId = orderComponentInfo.ProductId;
+            orderComponent.Amount = orderComponentInfo.Amount;
+            await context.Response.WriteAsJsonAsync(await logicService.UpdateOrderComponent(orderComponentInfo.id, orderComponent));
+        }
+        public async Task DeleteOrderComponent(HttpContext context)
+        {
+
+        }
     }
 }
